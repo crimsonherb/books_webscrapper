@@ -7,10 +7,23 @@
     <title>Book Scrapper</title>
 </head>
 <body>
+    {% if result %}
     <div id="">
         <table>
-            <tr></tr>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><strong>Price(&#163)</strong></td>
+            </tr>
+            {% for each in result %}
+            <tr>
+                <td>{{ each.title }}</td>
+                <td>{{ each.price }}</td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
+    {% else %}
+    <h3>No Result</h3>
+    {% endif %}
 </body>
 </html>
