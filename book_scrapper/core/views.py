@@ -2,7 +2,7 @@ from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
 
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
 
 # Create your views here.
 def get_html_content(page):
@@ -38,9 +38,7 @@ def get_info(links):
 
         title = book_soup.find(attrs={'class':'product_main'}).h1.text.strip()
         price = book_soup.find(attrs={'class':'product_main'}).p.text.strip()[2:]
-        # stock = book_soup.find(attrs={'class':'product_main'}).text.strip()
 
-        # book = {"title":title, "price":price, "stock":stock}
         book = {"title":title, "price":price}
         result.append(book)
     return result
@@ -52,20 +50,23 @@ def base(request):
     while True:
 
         html_data = get_html_content(page)
-        if html_data[1] == 200:
+        if html_data[1] == 200 and page <= 2:
             print(f" scrapping page {page} ")
             all_links = get_html_links(html_data[0])
-            result = get_info(all_links)
-            result_books.append(result)
+            results = get_info(all_links)
+            for result in results:
+                result_books.append(result)
             page += 1
         else:
             print("The End")
             break
 
         
-    # p = Paginator(result_books,2)
+    # p = Paginator(result_books,20)
     # page = request.GET.get('page')
-    # venues = p.get_page(page)
-    print(result_books)
+    # final_result = p.get_page(page)
+
+    # print(result_books)
+
     return render(request, 'core/index.html',{'result': result_books})
 

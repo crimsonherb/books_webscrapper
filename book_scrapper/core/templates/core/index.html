@@ -22,6 +22,22 @@
             {% endfor %}
         </table>
     </div>
+
+    <!-- {% if result.has_previous %}
+        <a href="?page=1">&laquo First</a>
+        <a href="?page={{ result.previous_page_number }}">Previous</a>
+
+    {% endif %}
+
+    Page {{ result.number }} of {{result.paginator.num_pages}}
+
+    {% if result.has_next %}
+        <a href="?page={{ result.next_page_number }">Next</a>
+        <a href="?page={{ result.paginator.num_pages }}">Last &raquo</a>
+
+    {% endif %} -->
+
+
     {% else %}
     <h3>No Result</h3>
     {% endif %}
